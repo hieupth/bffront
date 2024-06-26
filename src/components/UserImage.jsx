@@ -60,12 +60,13 @@ const UserImage = () => {
       alert("Vui lòng chọn ảnh trước khi tiếp tục!");
       return;
     }
-    setShowCaptcha(true);
+    uploadImage();
+    // setShowCaptcha(true);
   };
 
   const uploadImage = async () => {
     setIsLoading(true); // Bắt đầu hiển thị ảnh loading
-    setShowCaptcha(false); // Hide CAPTCHA after successful validation
+    // setShowCaptcha(false); // Hide CAPTCHA after successful validation
     const formData = new FormData();
     formData.append("file", file);
     formData.append("caption", "Your image caption");
@@ -96,27 +97,29 @@ const UserImage = () => {
   };
 
   return (
-    <>
+    <div className="user-image">
       <div className="image-container">
-        <img src="/square.png" className="border-image" width="580px" alt="img1"/>
-        <img src="/Hoa.png" className="hoa-1" width="50px" alt="img2"/>
-        <img src="/Hoa.png" className="hoa-2" width="100px" alt="img3"/>
+        {/* <img src="/square.png" className="border-image" width="580px" alt="img1"/> */}
+        {/* <img src="/Hoa.png" className="hoa-1" width="50px" alt="img2"/>
+        <img src="/Hoa.png" className="hoa-2" width="100px" alt="img3"/> */}
         {showWebcam ? (
           <>
             <Webcam
               audio={false}
               ref={webcamRef}
-              height={"100%"}
+              height={"auto"}
               width={"100%"}
               screenshotFormat="image/jpeg"
               className="webcam-view"
             />
-            <Button variant="primary" onClick={capture}>
+            <div className="text-align-center">
+            <Button onClick={capture}>
               Chụp ảnh
             </Button>
             <Button variant="secondary" onClick={() => setShowWebcam(false)}>
               Đóng Camera
             </Button>
+            </div>
           </>
         ) : (
           <>
@@ -158,15 +161,7 @@ const UserImage = () => {
           Tiếp tục
         </Button>
       </div>
-      {showCaptcha && (
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          sitekey="6LdxTwEqAAAAACO2k2y3CdLtJFxAlIoOp1ec6T_N"
-          onChange={handleCaptcha}
-          onExpired={() => setShowCaptcha(false)}
-        />
-      )}
-    </>
+    </div>
   );
 };
 

@@ -16,15 +16,7 @@ function App() {
       </Row>
       <div className="wrap">
         <Row className="justify-content-center container-main">
-          <div className="img-main-content">
-            {/* <img
-              className="border-img"
-              src="/square.png"
-              height="550px"
-              width="550px"
-            /> */}
-            <UserImage />
-          </div>
+          <UserImage />
         </Row>
       </div>
     </Container>

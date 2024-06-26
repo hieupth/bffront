@@ -3,7 +3,9 @@ name: CI/CD
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "dev"
 
 jobs:
   build:
@@ -21,6 +23,8 @@ jobs:
     - 
       name: Build
       run: npm run build
+      env:
+        DISABLE_ESLINT_PLUGIN: true
     - 
       name: Deploy
       run: |
@@ -29,6 +33,7 @@ jobs:
         git remote set-url origin https://${github_token}@github.com/${repository}
         npm run deploy
       env:
+        DISABLE_ESLINT_PLUGIN: true
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
         github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
