@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "./App.css";
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import UserImage from "./components/UserImage";
 
 function App() {

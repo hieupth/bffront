@@ -98,9 +98,9 @@ const UserImage = () => {
   return (
     <>
       <div className="image-container">
-        <img src="/square.png" className="border-image" width="580px" />
-        <img src="/Hoa.png" className="hoa-1" width="50px" />
-        <img src="/Hoa.png" className="hoa-2" width="100px" />
+        <img src="/square.png" className="border-image" width="580px" alt="img1"/>
+        <img src="/Hoa.png" className="hoa-1" width="50px" alt="img2"/>
+        <img src="/Hoa.png" className="hoa-2" width="100px" alt="img3"/>
         {showWebcam ? (
           <>
             <Webcam
