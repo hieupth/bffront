@@ -72,7 +72,6 @@ const UserImage = () => {
     try {
       const response = await fetch(
         "https://api.blueforestphathoachandung.com/run-url" + uri,
-        //"http://localhost:8000/run-url/" + uri,
         {
           method: "POST",
           body: formData,
@@ -97,35 +96,41 @@ const UserImage = () => {
 
   return (
     <>
-      <Row className="image-container">
-        {/* <img src="/square.png" className="border-image" width="580px" alt="img1"/> */}
+      <Row className="image-area">
+        {/* <div className="image-container">
+        <img src="/square2.png" className="border-image" alt="img1"/>
+        </div> */}
         {/* <img src="/Hoa.png" className="hoa-1" width="50px" alt="img2"/>
         <img src="/Hoa.png" className="hoa-2" width="100px" alt="img3"/> */}
         {showWebcam ? (
           <>
+          <div className="image-container text-align-center">
+            <img src="/square2.png" className="border-image" alt="img1"/>
             <Webcam
               audio={false}
               ref={webcamRef}
-              height={"auto"}
-              width={"100%"}
               screenshotFormat="image/jpeg"
               className="webcam-view"
             />
-            <div className="text-align-center">
-              <Button onClick={capture}>Chụp ảnh</Button>
-              <Button variant="secondary" onClick={() => setShowWebcam(false)}>Đóng Camera</Button>
+            <div className="button-overlay text-align-center">
+              <Button className="btn-upload-image" variant="primary" onClick={capture}>Chụp ảnh</Button>
+              <Button className="btn-upload-image" variant="secondary" onClick={() => setShowWebcam(false)}>Đóng Camera</Button>
             </div>
+          </div>
           </>
         ) : (
           <>
+          <div className="image-container text-align-center">
+            <img src="/square2.png" className="border-image" alt="img1"/>
             <Image className="img-preview" src={isLoading ? "/loading_screen.png" : image}/>
-            {!imageUploaded && !isLoading && (
-              <div className="button-overlay">
-                <Button className="btn-upload-image" variant="primary" onClick={() => setShowWebcam(true)}>Chụp chân dung</Button>
-                <span>Hoặc</span>
-                <Button className="btn-upload-image" variant="secondary" onClick={handleFileSelect}>Tải lên từ máy</Button>
-              </div>
-            )}
+          {!imageUploaded && !isLoading && (
+            <div className="button-overlay text-align-center">
+              <Button className="btn-upload-image" variant="primary" onClick={() => setShowWebcam(true)}>Chụp chân dung</Button>
+              {/* <span>Hoặc</span> */}
+              <Button className="btn-upload-image" variant="secondary" onClick={handleFileSelect}>Tải lên từ máy</Button>
+            </div>
+          )}
+          </div>
           </>
         )}
         <input
@@ -136,24 +141,24 @@ const UserImage = () => {
           style={{ display: "none" }}
         />
       </Row>
-      <Row className="user-image-btn-area">
+      <Row className="button-container">
         {step == 0 ? (
           <Row>
-            <Col><button className="btn-continue" onClick={handleContinue}>Tiếp tục</button></Col>
+            <button className="btn-continue" onClick={handleContinue}>Tiếp tục</button>
           </Row>
           ) : (
           <>
           {isLoading ? (<></>) : (
           <>
           <Row>
-            <Col>
+            
               <input className="text-caption" type="text" onKeyDown={(e) => {
                 if (e.key == 'Enter') {caption = e.target.value; handleContinue()}
               }}></input>
-            </Col>
+            
           </Row>
           <Row>
-            <Col><button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button></Col>
+            <button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button>
           </Row>
           </>)}
           </>
