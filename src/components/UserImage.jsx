@@ -6,7 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 const UserImage = () => {
   let caption = ''
   // let step = 0
-  const [image, setImage] = useState("/sky.png");
+  const [image, setImage] = useState("/trans.png");
   const [file, setFile] = useState(null);
   const [imageUploaded, setImageUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Trạng thái cho biết ảnh đang được tải
@@ -105,7 +105,7 @@ const UserImage = () => {
         {showWebcam ? (
           <>
           <div className="image-container text-align-center">
-            <img src="/square2.png" className="border-image" alt="img1"/>
+            <img src="/square4flower.png" className="border-image" alt="img1"/>
             <Webcam
               audio={false}
               ref={webcamRef}
@@ -121,7 +121,7 @@ const UserImage = () => {
         ) : (
           <>
           <div className="image-container text-align-center">
-            <img src="/square2.png" className="border-image" alt="img1"/>
+            <img src="/square4flower.png" className="border-image" alt="img1"/>
             <Image className="img-preview" src={isLoading ? "/loading_screen.png" : image}/>
           {!imageUploaded && !isLoading && (
             <div className="button-overlay text-align-center">
