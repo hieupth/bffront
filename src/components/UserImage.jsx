@@ -14,6 +14,8 @@ const UserImage = () => {
   const fileInputRef = useRef(null);
   const webcamRef = useRef(null);
   const [step, setStep] = useState(1);
+  const [sloganBtnVisible, setSloganBtnVisible] = useState(false)
+  // const [caption, setCaption] = useState('')
 
   const handleFileSelect = () => {
     fileInputRef.current.click();
@@ -137,6 +139,7 @@ const UserImage = () => {
               audio={false}
               ref={webcamRef}
               mirrored={true}
+              videoConstraints={{facingMode: 'user'}}
               screenshotFormat="image/jpeg"
               className="webcam-view"
             />
@@ -183,16 +186,29 @@ const UserImage = () => {
           {step == 3 && !isLoading ? (
             <>
               <Row>
-                <input className="text-caption" type="text" placeholder="Nhập thông điệp khác (0/50)" maxLength="50" onKeyDown={(e) => {
-                  if (e.key == 'Enter') {caption = e.target.value; handleContinue()}
-                }}></input>
+                <input className={sloganBtnVisible ? 'text-caption': 'text-caption-full'} type="text" placeholder="Nhập thông điệp khác (0/50)" maxLength="50" 
+                onChange={(e) => {
+                  caption = e.target.value;
+                  setSloganBtnVisible(e.target.value.length > 0);
+                }}
+                ></input>
+                {sloganBtnVisible && (
+                  <button className="text-caption-btn btn-continue" onClick={() => {
+                    handleContinue();
+                    setSloganBtnVisible(false);
+                  }}>OK</button>
+                )}
               </Row>
-              <Row><button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button></Row>
+              <Row><button className="btn-continue" onClick={() => {
+                caption = ''; 
+                handleContinue();
+                setSloganBtnVisible(false);
+              }}>Đổi thông điệp</button></Row>
               <Row>
-                <Col className="col-6" style={{paddingLeft: '0px'}}>
+                <Col className="col-6" style={{paddingRight: '5px', margin: '0px !important'}}>
                   <button className="btn-slogan" onClick={downloadImage}>Tải ảnh</button>
                 </Col>
-                <Col className="col-6" style={{paddingRight: '0px'}}>
+                <Col className="col-6" style={{paddingLeft: '5px'}}>
                   <button onClick={handleShareOnFacebook} className="btn-slogan">Chia sẻ</button>
                 </Col>
               </Row>
