@@ -95,6 +95,37 @@ const UserImage = () => {
     }
   };
 
+  const downloadImage = async () => {
+    if (!image) {
+      alert("Vui lòng chọn ảnh trước khi tải xuống!");
+      return;
+    }
+    // Tạo một yêu cầu fetch để lấy ảnh từ URL
+    try {
+      const response = await fetch(image);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      // Tạo một thẻ <a> tạm thời và thực hiện việc tải xuống
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "downloaded-image.jpg"; // Tên file có thể đặt theo yêu cầu
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url); // Xóa URL tạm thời
+    } catch (error) {
+      console.error("Không thể tải ảnh:", error);
+      alert("Lỗi khi tải ảnh xuống: " + error.message);
+    }
+  };
+
+  const handleShareOnFacebook = () => {
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      image
+    )}`;
+    window.open(facebookShareUrl, "_blank");
+  };
+
   return (
     <>
       <Row className="image-area">
@@ -159,15 +190,14 @@ const UserImage = () => {
               <Row><button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button></Row>
               <Row>
                 <Col className="col-6" style={{paddingLeft: '0px'}}>
-                  <button className="btn-slogan" onClick={() => {window.location.href = image}}>Tải ảnh</button>
+                  <button className="btn-slogan" onClick={downloadImage}>Tải ảnh</button>
                 </Col>
                 <Col className="col-6" style={{paddingRight: '0px'}}>
-                  <button className="btn-slogan">Chia sẻ</button>
+                  <button onClick={handleShareOnFacebook} className="btn-slogan">Chia sẻ</button>
                 </Col>
               </Row>
             </>
           ) : (<></>)}
-          
           </>)}
       </Row>
     </>

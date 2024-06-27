@@ -6,9 +6,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import UserImage from "./components/UserImage";
 
+
+const clearCacheData = () => {
+  caches.keys().then((names) => {
+      names.forEach((name) => {
+          caches.delete(name);
+      });
+  });
+};
+
 function App() {
   return (
     <Container>
+      {clearCacheData()}
       <Row className="slogan-container">
         <Col md={2} lg={3} className="d-lg-block d-md-block d-none"></Col>
         <Col xs={12} md={8} lg={6} className='text-align-center'>
@@ -17,7 +27,7 @@ function App() {
       </Row>
       <Row className="panel-container">
         <Col md={2} lg={4} className="d-lg-block d-md-block d-none"></Col>
-        <Col xs={12} md={8} lg={4} className='text-align-center'>
+        <Col xs={12} md={8} lg={4} className='text-align-center' style={{padding: '0px'}}>
           <UserImage/>
         </Col>
       </Row>
