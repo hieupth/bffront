@@ -13,7 +13,7 @@ const UserImage = () => {
   const [showWebcam, setShowWebcam] = useState(false);
   const fileInputRef = useRef(null);
   const webcamRef = useRef(null);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
 
   const handleFileSelect = () => {
     fileInputRef.current.click();
@@ -26,6 +26,7 @@ const UserImage = () => {
       reader.onload = (e) => {
         setImage(e.target.result);
         setFile(file);
+        setStep(2);
         setImageUploaded(true);
       };
       reader.readAsDataURL(file);
@@ -42,6 +43,7 @@ const UserImage = () => {
           type: "image/jpeg",
         });
         setFile(capturedFile);
+        setStep(2);
         setImageUploaded(true);
         setShowWebcam(false);
       });
@@ -57,8 +59,7 @@ const UserImage = () => {
   };
 
   const uploadImage = async () => {
-    setStep(1);
-
+    setStep(3);
     setIsLoading(true); // Bắt đầu hiển thị ảnh loading
     // setShowCaptcha(false); // Hide CAPTCHA after successful validation
     const formData = new FormData();
@@ -97,11 +98,6 @@ const UserImage = () => {
   return (
     <>
       <Row className="image-area">
-        {/* <div className="image-container">
-        <img src="/square2.png" className="border-image" alt="img1"/>
-        </div> */}
-        {/* <img src="/Hoa.png" className="hoa-1" width="50px" alt="img2"/>
-        <img src="/Hoa.png" className="hoa-2" width="100px" alt="img3"/> */}
         {showWebcam ? (
           <>
           <div className="image-container text-align-center">
@@ -109,6 +105,7 @@ const UserImage = () => {
             <Webcam
               audio={false}
               ref={webcamRef}
+              mirrored={true}
               screenshotFormat="image/jpeg"
               className="webcam-view"
             />
@@ -123,13 +120,13 @@ const UserImage = () => {
           <div className="image-container text-align-center">
             <img src="/square4flower.png" className="border-image" alt="img1"/>
             <Image className="img-preview" src={isLoading ? "/loading_screen.png" : image}/>
-          {!imageUploaded && !isLoading && (
+          {!imageUploaded && !isLoading || step == 1 ? (
             <div className="button-overlay text-align-center">
               <Button className="btn-upload-image" variant="primary" onClick={() => setShowWebcam(true)}>Chụp chân dung</Button>
               {/* <span>Hoặc</span> */}
               <Button className="btn-upload-image" variant="secondary" onClick={handleFileSelect}>Tải lên từ máy</Button>
             </div>
-          )}
+          ):(<></>)}
           </div>
           </>
         )}
@@ -142,27 +139,36 @@ const UserImage = () => {
         />
       </Row>
       <Row className="button-container">
-        {step == 0 ? (
-          <Row>
-            <button className="btn-continue" onClick={handleContinue}>Tiếp tục</button>
-          </Row>
+        {step == 2 ? (
+          <>
+            <Row><button className="btn-slogan" onClick={() => {
+              window.location.reload(false);
+              setStep(1);
+            }}>Thử lại</button></Row>
+            <Row><button className="btn-continue" onClick={handleContinue}>Tiếp tục</button></Row>
+          </>
           ) : (
           <>
-          {isLoading ? (<></>) : (
-          <>
-          <Row>
-            
-              <input className="text-caption" type="text" onKeyDown={(e) => {
-                if (e.key == 'Enter') {caption = e.target.value; handleContinue()}
-              }}></input>
-            
-          </Row>
-          <Row>
-            <button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button>
-          </Row>
+          {step == 3 && !isLoading ? (
+            <>
+              <Row>
+                <input className="text-caption" type="text" placeholder="Nhập thông điệp khác (0/50)" maxLength="50" onKeyDown={(e) => {
+                  if (e.key == 'Enter') {caption = e.target.value; handleContinue()}
+                }}></input>
+              </Row>
+              <Row><button className="btn-slogan" onClick={() => {caption = ''; handleContinue()}}>Đổi thông điệp</button></Row>
+              <Row>
+                <Col className="col-6" style={{paddingLeft: '0px'}}>
+                  <button className="btn-slogan" onClick={() => {window.location.href = image}}>Tải ảnh</button>
+                </Col>
+                <Col className="col-6" style={{paddingRight: '0px'}}>
+                  <button className="btn-slogan">Chia sẻ</button>
+                </Col>
+              </Row>
+            </>
+          ) : (<></>)}
+          
           </>)}
-          </>
-        )}
       </Row>
     </>
   );

@@ -8,7 +8,7 @@ import UserImage from "./components/UserImage";
 
 function App() {
   return (
-    <Container max-height="100%" height="100%">
+    <Container>
       <Row className="slogan-container">
         <Col md={2} lg={3} className="d-lg-block d-md-block d-none"></Col>
         <Col xs={12} md={8} lg={6} className='text-align-center'>
@@ -16,8 +16,8 @@ function App() {
         </Col>
       </Row>
       <Row className="panel-container">
-        <Col md={2} lg={3} className="d-lg-block d-md-block d-none"></Col>
-        <Col xs={12} md={8} lg={6} className='text-align-center'>
+        <Col md={2} lg={4} className="d-lg-block d-md-block d-none"></Col>
+        <Col xs={12} md={8} lg={4} className='text-align-center'>
           <UserImage/>
         </Col>
       </Row>
