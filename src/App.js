@@ -18,7 +18,7 @@ const clearCacheData = () => {
 function App() {
   return (
     <Container>
-      {clearCacheData()}
+      {/* {clearCacheData()} */}
       <Row className="slogan-container">
         <Col md={2} lg={3} className="d-lg-block d-md-block d-none"></Col>
         <Col xs={12} md={8} lg={6} className='text-align-center'>

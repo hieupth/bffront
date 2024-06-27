@@ -205,12 +205,15 @@ const UserImage = () => {
                 setSloganBtnVisible(false);
               }}>Đổi thông điệp</button></Row>
               <Row>
-                <Col className="col-6" style={{paddingRight: '5px', margin: '0px !important'}}>
+                <Col className="col-6" style={{paddingRight: '5px', paddingLeft: '0px', margin: '0px !important'}}>
                   <button className="btn-slogan" onClick={downloadImage}>Tải ảnh</button>
                 </Col>
-                <Col className="col-6" style={{paddingLeft: '5px'}}>
+                <Col className="col-6" style={{paddingLeft: '5px', paddingRight: '0px', margin: '0px !important'}}>
                   <button onClick={handleShareOnFacebook} className="btn-slogan">Chia sẻ</button>
                 </Col>
+              </Row>
+              <Row>
+                <p className="text-caution">Nhấn và giữ ảnh để tải về máy</p>
               </Row>
             </>
           ) : (<></>)}

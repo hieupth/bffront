@@ -12,7 +12,7 @@ body {
 }
 /* */
 .slogan-container {
-  height: 20%;
+  height: 150px;
   z-index: 99;
   position: relative;
 }
@@ -21,15 +21,15 @@ body {
   max-height: 100%;
 }
 .slogan {
-  padding-top: 3%;
-  max-height: 100%;
+  padding-top: 10px;
+  max-height: 150px;
   width: auto;
 }
 /* */
 .panel-container {
   height: 80%;
-  padding-top: 3%;
-  padding-bottom: 3%;
+  padding-top: 20px;
+  /* padding-bottom: 3%; */
 }
 .panel-container > div {
   /* height: 100%; */
@@ -59,14 +59,17 @@ body {
   z-index: 90;
 }
 .img-preview, .webcam-view {
-  width: 48%;
+  width: 60%;
   height: auto;
-  max-height: 100%;
+  max-height: 65%;
   object-fit: fill;
   position: absolute;
-  left: 26%;
+  left: 20%;
   top: 12%;
   z-index: 91;
+}
+.img-preview {
+  top: 14%;
 }
 .button-overlay {
   z-index: 99;
@@ -97,7 +100,7 @@ body {
   z-index: 99;
   position: relative;
   padding-left: 7.5%;
-  padding-right: 7.5%;
+  /* padding-right: 7.5%; */
 }
 .button-container > div {
   margin-top: 10px;
@@ -142,7 +145,10 @@ body {
   width: 20% !important;
   border-radius: 0px !important;
 }
-
+.text-caution {
+  color: white;
+  background: rgba(0, 0, 0, .5);
+}
 
 /* .center {
   display: block;
